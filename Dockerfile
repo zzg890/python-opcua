@@ -4,4 +4,4 @@ RUN pip install opcua
 
 WORKDIR examples
 COPY examples .
-CMD python examples/server-example.py
+CMD python server-example.py
