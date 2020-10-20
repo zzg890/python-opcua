@@ -145,21 +145,19 @@ if __name__ == "__main__":
     print("Available loggers are: ", logging.Logger.manager.loggerDict.keys())
     vup = VarUpdater(mysin)  # just  a stupide class update a variable
     vup.start()
-    try:
-        # enable following if you want to subscribe to nodes on server side
-        #handler = SubHandler()
+   
+    # enable following if you want to subscribe to nodes on server side
+    #handler = SubHandler()
         #sub = server.create_subscription(500, handler)
         #handle = sub.subscribe_data_change(myvar)
         # trigger event, all subscribed clients wil receive it
-        var = myarrayvar.get_value()  # return a ref to value in db server side! not a copy!
-        var = copy.copy(var)  # WARNING: we need to copy before writting again otherwise no data change event will be generated
-        var.append(9.3)
-        myarrayvar.set_value(var)
-        mydevice_var.set_value("Running")
-        myevgen.trigger(message="This is BaseEvent")
-        server.set_attribute_value(myvar.nodeid, ua.DataValue(9.9))  # Server side write method which is a but faster than using set_value
+    var = myarrayvar.get_value()  # return a ref to value in db server side! not a copy!
+    var = copy.copy(var)  # WARNING: we need to copy before writting again otherwise no data change event will be generated
+    var.append(9.3)
+    myarrayvar.set_value(var)
+    mydevice_var.set_value("Running")
+    myevgen.trigger(message="This is BaseEvent")
+    server.set_attribute_value(myvar.nodeid, ua.DataValue(9.9))  # Server side write method which is a but faster than using set_value
 
-        embed()
-    finally:
-        vup.stop()
-        server.stop()
+    embed()
+ 
