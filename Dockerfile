@@ -2,4 +2,6 @@ FROM python:3.6
 
 RUN pip install opcua
 
-CMD uaserver
+WORKDIR examples
+COPY examples .
+CMD python examples/server-example.py
